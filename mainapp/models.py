@@ -7,7 +7,7 @@ class ProductCategory(models.Model):
     description = models.TextField(verbose_name='описание', blank=True)
 
     def __str__(self):
-        return self.name, self.description
+        return self.name
 
 
 class Product(models.Model):
@@ -23,4 +23,4 @@ class Product(models.Model):
                                            default=0)
 
     def __str__(self):
-        return f'{self.name} {self.category.name} , {self.short_desc}'
+        return self.name
