@@ -121,3 +121,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # join media in project
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
