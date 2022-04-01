@@ -1,5 +1,7 @@
 import json
 from django.core.management.base import BaseCommand
+
+from authapp.models import User
 from mainapp.models import ProductCategory, Product
 
 
@@ -9,8 +11,9 @@ def load_from_json(file_name):
 
 
 class Command(BaseCommand):
-    def hendle(self, *args, **options):
-        category = load_from_json('mainapp/fixtures/category.json')
+    def handle(self, *args, **options):
+        User.objects.create_superuser(username='Anatolii', email='mail@mail.ru', password='1')
+        category = load_from_json('C:/Users/ElenaOstapenko/PycharmProjects/django/django_homework/mainapp/fixtures/category.json')
 
         ProductCategory.objects.all().delite()
         for categor in category:
@@ -19,7 +22,7 @@ class Command(BaseCommand):
             new_category = ProductCategory(**cat)
             new_category.save()
 
-        products = load_from_json('mainapp/fixtures/product.json')
+        products = load_from_json('C:/Users/ElenaOstapenko/PycharmProjects/django/django_homework/mainapp/fixtures/product.json')
 
         Product.objects.all().delite()
         for product in products:
