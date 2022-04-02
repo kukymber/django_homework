@@ -9,5 +9,5 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('register/', register, name='register'),
     path('logout/', logout, name='logout'),
-    path('detail/', products, name='detail'),
+    # path('detail/', products, name='detail'),
 ]

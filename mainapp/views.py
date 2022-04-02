@@ -15,7 +15,7 @@ def index(request):
         'data_time': data_time
 
     }
-    return render(request, "index.html", context=content)
+    return render(request, "mainapp/index.html", context=content)
 
 
 def products(request):
@@ -31,6 +31,6 @@ def products(request):
         'data_time': data_time
      }
 
-    return render(request, "products.html", context=content)
+    return render(request, "mainapp/products.html", context=content)
 
 
