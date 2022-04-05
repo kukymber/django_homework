@@ -36,7 +36,7 @@ class UserRegisterForm(UserCreationForm):
 
 class UserProfileForm(UserChangeForm):
     image = forms.ImageField(widget=forms.FileInput(), required=False)
-    age = forms.ImageField(widget=forms.NumberInput(), required=False)
+    age = forms.IntegerField(widget=forms.NumberInput(), required=False)
 
     class Meta:
         model = User

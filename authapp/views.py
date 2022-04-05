@@ -55,9 +55,16 @@ def register(request):
 
 
 def profile(request):
+    if request.method == 'POST':
+        form = UserProfileForm(instance=request.user, data=request.POST, files=request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print(form.errors)
+
     content = {
         'title': "Geekshop | Профайл",
-        'form': UserProfileForm()
+        'form': UserProfileForm(instance=request.user)
     }
     return render(request, 'authapp/profile.html', context=content)
 
