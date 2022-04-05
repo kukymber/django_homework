@@ -1,46 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>GeekShop - Профиль</title>
+{% extends 'authapp/base.html'%}
+{% load static %}
 
-    <!-- Bootstrap core CSS -->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+{% block css %}
+    <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+{% endblock %}
 
-    <!-- Custom styles for this template -->
-    <link href="../css/profile.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="../index.html">GeekShop</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="../products.html">Каталог <i class="fas fa-shopping-bag"></i></a>
-                </li>
-                <!--                <li class="nav-item">-->
-                <!--                    <a class="nav-link" href="../auth/login.html">Войти <i class="fas fa-sign-in-alt"></i></a>-->
-                <!--                </li>-->
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">User <i class="fas fa-user-circle"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Выйти <i class="fas fa-sign-out-alt"></i></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
+{% block content %}
 <div class="container">
     <div class="row">
         <div class="col-lg-7">
@@ -54,38 +19,38 @@
                 <div class="form-row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="small mb-1" for="inputFirstName">Имя</label>
-                            <input class="form-control py-4" id="inputFirstName" type="text" value="Николай"/>
+                            <label class="small mb-1" for="{{ form.first_name.id_for_label }}">Имя</label>
+                            {{form.first_name}}
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="small mb-1" for="inputLastName">Фамилия</label>
-                            <input class="form-control py-4" id="inputLastName" type="text" value="Нагорный"/>
+                             <label class="small mb-1" for="{{ form.last_name.id_for_label }}">Фамилия</label>
+                             {{form.last_name}}
                         </div>
                     </div>
                 </div>
                 <div class="form-row mb-2">
                     <div class="col-lg-12">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="userAvatar" size="50">
-                            <label class="custom-file-label" for="userAvatar">Выберите изображение</label>
+                             {{form.image}}
+                            <label class="custom-file-label" for="{{ form.image.id_for_label }}">Выберите изображение</label>
                         </div>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="col-lg-6">
-                        <label class="small mb-1" for="inputUsername">Имя пользователя</label>
-                        <input class="form-control py-4" id="inputUsername" type="text"
-                               aria-describedby="usernameHelp"
-                               value="valeriy" disabled/>
+                    <div class="col-lg-4">
+                        <label class="small mb-1" for="{{ form.username.id_for_label }}">Имя пользователя</label>
+                        {{form.username}}
                     </div>
-                    <div class="col-lg-6">
-                        <label class="small mb-1" for="inputEmailAddress">Адрес электронной
-                            почты</label>
-                        <input class="form-control py-4" id="inputEmailAddress" type="email"
-                               aria-describedby="emailHelp"
-                               value="isp06@mail.ru" disabled/>
+                    <div class="col-lg-4">
+                        <label class="small mb-1" for="{{ form.email.id_for_label }}">Адрес электронной
+                                почты</label>
+                        {{form.email}}
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="small mb-1" for="{{ form.age.id_for_label }}">Возраст</label>
+                        {{form.age}}
                     </div>
                 </div>
                 <div class="form-row">
@@ -93,6 +58,7 @@
                         <input class="btn btn-info btn-block" type="submit" value="Сохранить">
                     </div>
                 </div>
+
             </form>
         </div>
         <div class="col-lg-5">
@@ -131,12 +97,4 @@
         </div>
     </div>
 </div>
-
-<!-- Bootstrap core JavaScript -->
-<script src="../vendor/jquery/jquery.min.js"></script>
-<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- FontAwesome script -->
-<script src="../vendor/fontawesome/fontawesome-icons.js" crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}

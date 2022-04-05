@@ -1,13 +1,13 @@
 from datetime import datetime
 
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse
 
-from authapp.forms import UserLoginForm, UserRegisterForm
+from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 
 
 def login(request):
@@ -39,6 +39,7 @@ def register(request):
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Вы успешно зарегистрировались')
             return HttpResponseRedirect(reverse('authapp:login'))
 
         else:
@@ -51,6 +52,14 @@ def register(request):
         'form': form
     }
     return render(request, 'authapp/register.html', context=content)
+
+
+def profile(request):
+    content = {
+        'title': "Geekshop | Профайл",
+        'form': UserProfileForm()
+    }
+    return render(request, 'authapp/profile.html', context=content)
 
 
 def logout(request):
