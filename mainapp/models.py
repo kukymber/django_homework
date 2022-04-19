@@ -23,4 +23,4 @@ class Product(models.Model):
                                            default=0)
 
     def __str__(self):
-        return self.name, self.category.name, self.price, self.category.verbose_name, self.quantity, self.description
+        return self.name, self.price, self.quantity, self.description
