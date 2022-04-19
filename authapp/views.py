@@ -1,13 +1,15 @@
 from datetime import datetime
 
-from django.contrib import auth
+from django.contrib import auth, messages
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse
 
-from authapp.forms import UserLoginForm, UserRegisterForm
+from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
+from basket.models import Basket
 
 
 def login(request):
@@ -39,6 +41,7 @@ def register(request):
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Вы успешно зарегистрировались')
             return HttpResponseRedirect(reverse('authapp:login'))
 
         else:
@@ -53,6 +56,23 @@ def register(request):
     return render(request, 'authapp/register.html', context=content)
 
 
+@login_required()
+def profile(request):
+    if request.method == 'POST':
+        form = UserProfileForm(instance=request.user, data=request.POST, files=request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print(form.errors)
+    user_select = request.user
+    content = {
+        'title': "Geekshop | Профайл",
+        'form': UserProfileForm(instance=request.user),
+        'baskets': Basket.objects.filter(user=user_select)
+    }
+    return render(request, 'authapp/profile.html', context=content)
+
+
 def logout(request):
     auth.logout(request)
     data_time = {'data_time_now': datetime.now().strftime("%d-%m-%Y %H:%M")}
@@ -65,3 +85,17 @@ def logout(request):
     }
 
     return render(request, 'mainapp/index.html', context=content)
+
+
+def index(request):
+    data_time = {'data_time_now': datetime.now().strftime("%d-%m-%Y %H:%M")}
+    content = {
+
+        'name_of_shop': 'GeekShop Store',
+        'text': 'Новые образы и лучшие бренды на GeekShop Store.'
+                'Бесплатная доставка по всему миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.',
+        'button_name': 'Начать покупки',
+        'data_time': data_time
+
+    }
+    return render(request, "mainapp/index.html", context=content)
