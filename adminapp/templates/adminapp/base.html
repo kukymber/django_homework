@@ -1,14 +1,13 @@
-{% load static %}
-
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="viewport" content='width=device-width, initial-scale=1, shrink-to-fit=no'/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>GeekShop - Admin</title>
+    <title>{{title}}</title>
     <link href="{% static 'css/auth-admin.css' %}" rel="stylesheet"/>
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
           crossorigin="anonymous"/>
@@ -53,13 +52,13 @@
                         </div>
                         Пользователи
                     </a>
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="{% url 'adminapp:admin_products' %}">
                         <div class="sb-nav-link-icon">
                             <i class="fas fa-shopping-basket"></i>
                         </div>
                         Категории
                     </a>
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="{% url 'adminapp:admin_product_category' %}">
                         <div class="sb-nav-link-icon">
                             <i class="fas fa-tshirt"></i>
                         </div>
@@ -71,8 +70,10 @@
         </nav>
     </div>
     <div id="layoutSidenav_content">
-        {% block context %}
-        {% end block %}
+        <main>
+            {% block context %}
+            {% endblock %}
+        </main>
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">

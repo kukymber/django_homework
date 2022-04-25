@@ -1,0 +1,30 @@
+{% extends 'adminapp/base.html'%}
+{% block context %}
+<div class="row">
+    {% for product in products %}
+        <div class="col-lg-2 col-md-3 mb-2">
+            <div class="card h-65">
+
+                <a href="#">
+                    <img class="card-img-top"
+                         src="{{product.image.url}}"
+                         alt="">
+                </a>
+
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">{{product.name}}</a>
+                    </h4>
+                    <h5>{{product.price}}</h5>
+                    <p class="card-text">{{product.text}}</p>
+                </div>
+                <div class="card-footer text-center">
+                    <button type="button" class="btn btn-outline-success" value="{{product.id}}">
+                        Отправить в корзину
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

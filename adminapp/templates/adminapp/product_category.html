@@ -1,0 +1,8 @@
+{% extends 'adminapp/base.html' %}
+{% block context %}
+<div class="list-group">
+    {% for cat in categories %}
+        <a href="#" class="list-group-item">{{cat.name|title}} </a>
+    {% endfor %}
+</div>
+{% endblock %}
