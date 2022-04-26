@@ -18,17 +18,22 @@ def index(request):
     return render(request, "mainapp/index.html", context=content)
 
 
-def products(request):
+def products(request, id_category=None):
+    if id_category:
+        products_ = Product.objects.filter(category_id=id_category)
+    else:
+        products_= Product.objects.all()
+
     categories = ProductCategory.objects.all()
-    products = Product.objects.all()
+    # products = Product.objects.all()
 
     data_time = {'data_time_now': datetime.datetime.now().strftime("%d-%m-%Y %H:%M")}
 
     content = {
         'title': 'Geekshop - Каталог',
         'categories': categories,
-        'products': products,
-        'data_time': data_time
+        'products': products_,
+        'data_time': data_time,
      }
 
     return render(request, "mainapp/products.html", context=content)

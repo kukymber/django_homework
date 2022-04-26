@@ -12,8 +12,8 @@ def load_from_json(file_name):
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        User.objects.create_superuser(username='Anatolii', email='mail@mail.ru', password='1')
-        category = load_from_json('C:/Users/ElenaOstapenko/PycharmProjects/django/django_homework/mainapp/fixtures/category.json')
+        # User.objects.create_superuser(username='Anatolii', email='mail@mail.ru', password='1')
+        category = load_from_json('mainapp/fixtures/category.json')
 
         ProductCategory.objects.all().delete()
         for categor in category:
@@ -22,7 +22,7 @@ class Command(BaseCommand):
             new_category = ProductCategory(**cat)
             new_category.save()
 
-        products = load_from_json('C:/Users/ElenaOstapenko/PycharmProjects/django/django_homework/mainapp/fixtures/products.json')
+        products = load_from_json('mainapp/fixtures/products.json')
 
         Product.objects.all().delete()
         for product in products:
