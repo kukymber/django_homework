@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 from django.views.generic import ListView, TemplateView, CreateView, DetailView, UpdateView, DeleteView
 
-from adminapp.forms import UserAdminRegisterForm, UserAdminProfileForm
+from adminapp.forms import UserAdminRegisterForm, UserAdminProfileForm, ProductCreationForm
 from authapp.models import User
 from adminapp.mixin import BaseClassContextMixin, CustomDispatchMixin
 from mainapp.models import Product, ProductCategory
@@ -105,25 +105,44 @@ class UserDeleteView(DeleteView, BaseClassContextMixin, CustomDispatchMixin):
         return HttpResponseRedirect(self.get_success_url())
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def admin_users_delete(request, id):
-    user = User.objects.get(id=id)
-    user.is_active = False
-    user.save()
-    return HttpResponseRedirect(reverse('adminapp:admin_users'))
+# @user_passes_test(lambda u: u.is_superuser)
+# def admin_users_delete(request, id):
+#     user = User.objects.get(id=id)
+#     user.is_active = False
+#     user.save()
+#     return HttpResponseRedirect(reverse('adminapp:admin_users'))
 
 
-def admin_product_category(request):
-    context = {
-        'title': 'Админка | Категории',
-        'categories': ProductCategory.objects.all(),
-    }
-    return render(request, 'adminapp/product_category.html', context)
+class ProductCreateFrom(CreateView, BaseClassContextMixin, CustomDispatchMixin):
+    model = Product
+    template_name = 'adminapp/admin-product-category.html'
+    form_class = ProductCreationForm
+    title = 'Админка | Создание продукта'
+    # success_url = reverse_lazy('adminapp:admin_users')
 
 
-def admin_products(request):
+class ProductListViews(ListView, BaseClassContextMixin, CustomDispatchMixin):
+    model = Product
+    template_name = 'adminapp/test.html'
+    title = 'Админка | продукты'
+    context_object_name = 'product'
+
+
+class ProductUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
+    model = User
+    template_name = 'adminapp/a'
+    form_class = UserAdminProfileForm
+    title = 'Админка | Обновление пользователя'
+    success_url = reverse_lazy('adminapp:admin_users')
+
+
+def admin_product(request):
     context = {
         'title': 'Админка | Продукты',
         'products': Product.objects.all(),
     }
-    return render(request, 'adminapp/products.html', context)
+    return render(request, 'adminapp/admin-product-create.html', context)
+
+
+def admin_product_update(request):
+    pass
