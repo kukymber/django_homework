@@ -17,11 +17,6 @@ class IndexTemplateView(TemplateView, BaseClassContextMixin, CustomDispatchMixin
     title = 'Главная страница'
 
 
-# @user_passes_test(lambda u: u.is_superuser)
-# def index(request):
-#     return render(request, 'adminapp/admin.html')
-#
-
 class UserListView(ListView, BaseClassContextMixin, CustomDispatchMixin):
     model = User
     template_name = 'adminapp/admin-users-read.html'
@@ -72,7 +67,7 @@ class ProductCreateFrom(CreateView, BaseClassContextMixin, CustomDispatchMixin):
 
 class ProductListViews(ListView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
-    template_name = 'adminapp/test.html'
+    template_name = 'adminapp/admin-product-read.html'
     title = 'Админка | Продукты'
     context_object_name = 'products'
 
@@ -85,13 +80,18 @@ class ProductUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
     success_url = reverse_lazy('adminapp:admin_product')
 
 
-def admin_product(request):
-    context = {
-        'title': 'Админка | Продукты',
-        'products': Product.objects.all(),
-    }
-    return render(request, 'adminapp/admin-product-create.html', context)
+class ProductDeleteView(DeleteView, BaseClassContextMixin, CustomDispatchMixin):
+    model = Product
+    template_name = 'adminapp/admin-product-update-delete.html'
+    form_class = ProductAdminForm
+    title = 'Админка | Удаление продукта'
+    success_url = reverse_lazy('adminapp:admin_product')
 
+    def delete(self, request, *args, **kwargs):
+        pass
 
-def admin_product_update(request):
-    pass
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())

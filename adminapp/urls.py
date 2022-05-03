@@ -1,7 +1,7 @@
 from django.urls import path
 
 from adminapp.views import UserListView, UserCreateView, UserUpdateView, UserDeleteView, \
-    ProductCreateFrom, IndexTemplateView, admin_product_update, ProductListViews, ProductUpdateView
+    ProductCreateFrom, IndexTemplateView, ProductListViews, ProductUpdateView, ProductDeleteView
 
 app_name = 'adminapp'
 urlpatterns = [
@@ -13,6 +13,6 @@ urlpatterns = [
     path('admin-product/', ProductListViews.as_view(), name='admin_product'),
     path('admin-product-create/', ProductCreateFrom.as_view(), name='admin_product_create'),
     path('admin-product-update/<int:pk>/', ProductUpdateView.as_view(), name='admin_product_update'),
-    # path('admin-product-delete/<int:pk>/', ProductUpdateView.as_view(), name='admin_product_update'),
+    path('admin-product-delete/<int:pk>/', ProductDeleteView.as_view(), name='admin_product_delete'),
 
 ]
