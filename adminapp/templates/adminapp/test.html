@@ -31,8 +31,8 @@
                         <tr>
                             <td><a href="{% url 'adminapp:admin_product_update' product.id %}"
                                    style="color: dodgerblue">{{product.name}}</a></td>
-                            <td>{{product.category}}</td>
-                            <td>{{product.price}}</td>
+                            <td>{{product.category | title }}</td>
+                            <td>{{product.price }}</td>
                             <td>{{product.quantity}}</td>
 
                         </tr>

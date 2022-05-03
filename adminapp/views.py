@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 from django.views.generic import ListView, TemplateView, CreateView, DetailView, UpdateView, DeleteView
 
-from adminapp.forms import UserAdminRegisterForm, UserAdminProfileForm, ProductCreationForm
+from adminapp.forms import UserAdminRegisterForm, UserAdminProfileForm, ProductCreationForm, ProductAdminForm
 from authapp.models import User
 from adminapp.mixin import BaseClassContextMixin, CustomDispatchMixin
 from mainapp.models import Product, ProductCategory
@@ -69,25 +69,20 @@ class ProductCreateFrom(CreateView, BaseClassContextMixin, CustomDispatchMixin):
     title = 'Админка | Создание продукта'
     success_url = reverse_lazy('adminapp:admin_product')
 
-    # def post(self, request, *args, **kwargs):
-    #     self.object = self.get_object()
-    #     self.object.save()
-    #     return HttpResponseRedirect(self.get_success_url())
-
 
 class ProductListViews(ListView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
     template_name = 'adminapp/test.html'
     title = 'Админка | Продукты'
-    context_object_name = 'product'
+    context_object_name = 'products'
 
 
 class ProductUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
-    model = User
+    model = Product
     template_name = 'adminapp/admin-product-update-delete.html'
-    form_class = UserAdminProfileForm
-    title = 'Админка | Обновление пользователя'
-    success_url = reverse_lazy('adminapp:admin_users')
+    form_class = ProductAdminForm
+    title = 'Админка | Обновление продукта'
+    success_url = reverse_lazy('adminapp:admin_product')
 
 
 def admin_product(request):

@@ -53,12 +53,12 @@ class ProductCategoryEditForm(forms.ModelForm):
 
 class ProductAdminForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ('username', 'last_name', 'first_name', 'email', 'image', 'age')
+        model = Product
+        fields = ('category', 'name', 'image', 'short_desc', 'description', 'price', 'quantity')
 
     def __init__(self, *args, **kwargs):
         super(ProductAdminForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs['readonly'] = True
+        self.fields['name'].widget.attrs['readonly'] = True
 
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
@@ -68,11 +68,11 @@ class ProductAdminForm(forms.ModelForm):
 class ProductCreationForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['category', 'name', 'image', 'short_desc', 'description', 'price', 'quantity']
+        fields = ('category', 'name', 'image', 'short_desc', 'description', 'price', 'quantity')
 
     def __init__(self, *args, **kwargs):
         super(ProductCreationForm, self).__init__(*args, **kwargs)
-        self.fields['category'].widget.attrs['placeholder'] = 'sadf asd'
+        self.fields['category'].widget.attrs['placeholder'] = 'sadf asd'   #    !!!
         self.fields['name'].widget.attrs['placeholder'] = "Введите название продукта"
         self.fields['image'].widget.attrs['placeholder'] = "Добавить фотографию"
         self.fields['short_desc'].widget.attrs['placeholder'] = "Введите краткое описание"
