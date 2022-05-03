@@ -29,37 +29,12 @@ class UserListView(ListView, BaseClassContextMixin, CustomDispatchMixin):
     context_object_name = 'users'
 
 
-# @user_passes_test(lambda u: u.is_superuser)
-# def admin_users(request):
-#     content = {
-#         'title': 'Админка | Пользователи',
-#         'users': User.objects.all()
-#     }
-#     return render(request, 'adminapp/admin-users-read.html', context=content)
-
 class UserCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin):
     model = User
     template_name = 'adminapp/admin-users-create.html'
     form_class = UserAdminRegisterForm
     title = 'Админка | Пользователи'
     success_url = reverse_lazy('adminapp:admin_users')
-
-
-# @user_passes_test(lambda u: u.is_superuser)
-# def admin_users_create(request):
-#     if request == 'POST':
-#         form = UserAdminRegisterForm(data=request.POST, files=request.FIELS)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse('adminapp:admin_users'))
-#     else:
-#         form = UserAdminRegisterForm()
-#     content = {
-#         'title': 'Админка | Регистрация ',
-#         'form': form
-#     }
-#
-#     return render(request, 'adminapp/admin-users-create.html', context=content)
 
 
 class UserUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
@@ -69,24 +44,6 @@ class UserUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
     title = 'Админка | Обновление пользователя'
     success_url = reverse_lazy('adminapp:admin_users')
 
-
-# @user_passes_test(lambda u: u.is_superuser)
-# def admin_users_update(request, id):
-#     user_select = User.objects.get(id=id)
-#     if request.method == 'POST':
-#         form = UserAdminProfileForm(date=request.POST, instance=user_select, files=request.FIELS)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse('adminapp:admin_users'))
-#     else:
-#         form = UserAdminProfileForm(instance=user_select)
-#
-#     content = {
-#         'title': 'Админка | Обновление пользователя',
-#         'form': form,
-#         'user_select': user_select
-#     }
-#     return render(request, 'adminapp/admin-users-update-delete.html', context=content)
 
 class UserDeleteView(DeleteView, BaseClassContextMixin, CustomDispatchMixin):
     model = User
@@ -105,32 +62,29 @@ class UserDeleteView(DeleteView, BaseClassContextMixin, CustomDispatchMixin):
         return HttpResponseRedirect(self.get_success_url())
 
 
-# @user_passes_test(lambda u: u.is_superuser)
-# def admin_users_delete(request, id):
-#     user = User.objects.get(id=id)
-#     user.is_active = False
-#     user.save()
-#     return HttpResponseRedirect(reverse('adminapp:admin_users'))
-
-
 class ProductCreateFrom(CreateView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
-    template_name = 'adminapp/admin-product-category.html'
+    template_name = 'adminapp/admin-product-create.html'
     form_class = ProductCreationForm
     title = 'Админка | Создание продукта'
-    # success_url = reverse_lazy('adminapp:admin_users')
+    success_url = reverse_lazy('adminapp:admin_product')
+
+    # def post(self, request, *args, **kwargs):
+    #     self.object = self.get_object()
+    #     self.object.save()
+    #     return HttpResponseRedirect(self.get_success_url())
 
 
 class ProductListViews(ListView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
     template_name = 'adminapp/test.html'
-    title = 'Админка | продукты'
+    title = 'Админка | Продукты'
     context_object_name = 'product'
 
 
 class ProductUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
     model = User
-    template_name = 'adminapp/a'
+    template_name = 'adminapp/admin-product-update-delete.html'
     form_class = UserAdminProfileForm
     title = 'Админка | Обновление пользователя'
     success_url = reverse_lazy('adminapp:admin_users')

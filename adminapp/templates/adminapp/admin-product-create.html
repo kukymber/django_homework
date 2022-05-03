@@ -1,24 +1,24 @@
 {% extends 'adminapp/base.html' %}
-{% block content %}
+{% block context %}
 <div class="container-fluid">
     <h1 class="mt-4">Создание пользователя</h1>
-    <form action="{% url 'adminapp:admin_users_create' category.id %}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'adminapp:admin_product_create'  %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label class="small mb-1" for="{{ form.product_name.id_for_label }}">Название продукта</label>
-                    {{form.product_name}}
+                    <label class="small mb-1" for="{{ form.name.id_for_label }}">Название продукта</label>
+                    {{form.name}}
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label class="small mb-1" for="{{ form.category_name.id_for_label }}">Название категоррии </label>
-                    {{ form.category_name}}
+                    <label class="small mb-1" for="{{ form.category.id_for_label }}">Выбрать категорию</label>
+                    {{ form.category }}
                 </div>
             </div>
         </div>
-        <div class="form-row mb-2">
+        <div class="form-row mb-1">
             <div class="col-lg-12">
                 <div class="custom-file">
                     {{form.image}}
@@ -27,25 +27,25 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="col-lg-6">
-                <label class="small mb-1" for="{{form.short_descr.id_for_label}}">Краткое описание</label>
-                {{form.short_descr}}
+            <div class="col-lg-8">
+                <label class="small mb-1" for="{{form.short_desc.id_for_label}}">Краткое описание</label>
+                {{form.short_desc}}
             </div>
-            <div class="col-lg-4">
-                <label class="small mb-1" for="{{form.description.id_for_label}}">Описание продукта
-                    почты</label>
-                {{form.description}}
-            </div>
-            <div class="col-lg-2">
-                <label class="small mb-1" for="{{form.price.id_for_label}}">Цена</label>
-                {{form.price}}
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <label class="small mb-1" for="{{form.quantity.id_for_label}}">Количество</label>
+                    {{form.quantity}}
+                </div>
+                <div class="col-lg-6">
+                    <label class="small mb-1" for="{{form.price.id_for_label}}">Цена</label>
+                    {{form.price}}
+                </div>
             </div>
         </div>
-        <div class="form-row">
-            <div class="col-lg-6">
-                <label class="small mb-1" for="{{form.quantity.id_for_label}}">Количество</label>
-                {{form.quantity}}
-            </div>
+        <div class="col-lg-13">
+            <label class="small mb-1" for="{{form.description.id_for_label}}">Описание продукта
+                почты</label>
+            {{form.description}}
         </div>
         <div class="form-row">
             <div class="col-lg-12" style="margin-top: 33px;">
