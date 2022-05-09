@@ -18,7 +18,7 @@ def index(request):
         'data_time': data_time
 
     }
-    return render(request, "mainapp/index.html", context=content)
+    return render(request, "mainapp/index.html", content)
 
 
 def products(request, id_category=None, page=1):
@@ -44,7 +44,7 @@ def products(request, id_category=None, page=1):
         'data_time': data_time
     }
 
-    return render(request, "mainapp/products.html", context=content)
+    return render(request, "mainapp/products.html", content)
 
 
 class ProductDetail(DetailView):
