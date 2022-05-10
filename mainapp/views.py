@@ -18,7 +18,7 @@ def index(request):
         'data_time': data_time
 
     }
-    return render(request, "mainapp/index.html", content)
+    return render(request, "mainapp/index.html", context=content)
 
 
 def products(request, id_category=None, page=1):
