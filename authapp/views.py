@@ -1,111 +1,89 @@
-from datetime import datetime
-
+from django.conf import settings
 from django.contrib import auth, messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LogoutView, FormView, LoginView
+from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-
-# Create your views here.
 from django.urls import reverse, reverse_lazy
-from authapp.models import User
-from adminapp.mixin import BaseClassContextMixin, CustomDispatchMixin
+from django.views.generic import UpdateView, FormView
+
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
+from authapp.models import User
 from basket.models import Basket
-from django.contrib.auth.views import LoginView
+from adminapp.mixin import BaseClassContextMixin, UserDispatchMixin
 
 
-class LoginUserView(LoginView, BaseClassContextMixin, CustomDispatchMixin):
-    model = User
+class LoginGBView(LoginView, BaseClassContextMixin):
     template_name = 'authapp/login.html'
     form_class = UserLoginForm
     title = 'Geekshop | Авторизация'
-    success_url = reverse_lazy('authapp:index')
 
 
-# def login(request):
-#     if request.method == 'POST':
-#         form = UserLoginForm(data=request.POST)
-#         if form.is_valid():
-#             username = request.POST.get('username')
-#             password = request.POST.get('password')
-#             user = auth.authenticate(username=username, password=password)
-#             if user.is_active:
-#                 auth.login(request, user)
-#                 return HttpResponseRedirect(reverse('index'))
-#             else:
-#                 print("Пользователь неактивный")
-#         else:
-#             print(form.errors)
-#     else:
-#         form = UserLoginForm()
-#
-#     content = {
-#         'title': 'Geekshop | Авторизация',
-#         'form': form
-#     }
-#     return render(request, 'authapp/login.html', context=content)
+class RegisterView(FormView, BaseClassContextMixin):
+    model = User
+    title = 'Geekshop | Регистрация'
+    form_class = UserRegisterForm
+    template_name = 'authapp/register.html'
+    success_url = reverse_lazy('authapp:login')
 
-
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(data=request.POST)
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(data=request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Вы успешно зарегистрировались')
-            return HttpResponseRedirect(reverse('authapp:login'))
-
+            user = form.save()
+            if self.send_verify_link(user):
+                messages.set_level(request, messages.SUCCESS)
+                messages.success(request, 'Вы успешно зарегистрировались')
+                return HttpResponseRedirect(reverse('authapp:login'))
+            else:
+                messages.set_level(request, messages.ERROR)
+                messages.error(request, form.errors)
         else:
-            print(form.errors)
-    else:
-        form = UserRegisterForm()
+            messages.set_level(request, messages.ERROR)
+            messages.error(request, form.errors)
+        context = {'form': form}
+        return render(request, self.template_name, context)
 
-    content = {
-        'title': 'Geekshop | Регистрация',
-        'form': form
-    }
-    return render(request, 'authapp/register.html', context=content)
+    def send_verify_link(self, user):
+        verify_link = reverse('authapp:verify', args=[user.email, user.activation_key])
+        subject = f'Для активации учетной записи {user.username} пройдите по ссылки'
+        message = f'Для подтверждения учетной записи {user.username} на портале \n {settings.DOMAIN_NAME}{verify_link}'
+        return send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
 
-
-@login_required()
-def profile(request):
-    if request.method == 'POST':
-        form = UserProfileForm(instance=request.user, data=request.POST, files=request.POST)
-        if form.is_valid():
-            form.save()
-        else:
-            print(form.errors)
-    user_select = request.user
-    content = {
-        'title': "Geekshop | Профайл",
-        'form': UserProfileForm(instance=request.user),
-        'baskets': Basket.objects.filter(user=user_select)
-    }
-    return render(request, 'authapp/profile.html', context=content)
+    def verify(self, email, activate_key):
+        try:
+            user = User.objects.get(email=email)
+            if user and user.activation_key == activate_key and not user.is_activation_key_expires():
+                user.activation_key = ''
+                user.activation_key_expires = None
+                user.is_active = True
+                user.save()
+                auth.login(self, user, backend='django.contrib.auth.backends.ModelBackend')
+            return render(self, 'authapp/verification.html')
+        except Exception as e:
+            return HttpResponseRedirect(reverse('index'))
 
 
-def logout(request):
-    auth.logout(request)
-    data_time = {'data_time_now': datetime.now().strftime("%d-%m-%Y %H:%M")}
-    content = {
-        'name_of_shop': 'GeekShop Store',
-        'text': 'Новые образы и лучшие бренды на GeekShop Store.'
-                'Бесплатная доставка по всему миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.',
-        'button_name': 'Начать покупки',
-        'data_time': data_time
-    }
-
-    return render(request, 'mainapp/index.html', context=content)
+class Logout(LogoutView):
+    template_name = 'mainapp/index.html'
 
 
-def index(request):
-    data_time = {'data_time_now': datetime.now().strftime("%d-%m-%Y %H:%M")}
-    content = {
+class ProfileFormView(UpdateView, BaseClassContextMixin, UserDispatchMixin):
+    model = User
+    template_name = 'authapp/profile.html'
+    form_class = UserProfileForm
+    title = 'Geekshop | Профиль'
+    success_url = reverse_lazy('authapp:profile')
 
-        'name_of_shop': 'GeekShop Store',
-        'text': 'Новые образы и лучшие бренды на GeekShop Store.'
-                'Бесплатная доставка по всему миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.',
-        'button_name': 'Начать покупки',
-        'data_time': data_time
+    def get_context_data(self, **kwargs):
+        context = super(ProfileFormView, self).get_context_data()
+        context['baskets'] = Basket.objects.filter(user=self.request.user)
+        return context
 
-    }
-    return render(request, "mainapp/index.html", context=content)
+    def form_valid(self, form):
+        messages.set_level(self.request, messages.SUCCESS)
+        messages.error(self.request, 'Данные изменены')
+        super().form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_object(self, queryset=None):
+        return User.objects.get(id=self.request.user.pk)
