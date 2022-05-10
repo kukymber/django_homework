@@ -6,34 +6,44 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from django.urls import reverse
-
+from django.urls import reverse, reverse_lazy
+from authapp.models import User
+from adminapp.mixin import BaseClassContextMixin, CustomDispatchMixin
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 from basket.models import Basket
+from django.contrib.auth.views import LoginView
 
 
-def login(request):
-    if request.method == 'POST':
-        form = UserLoginForm(data=request.POST)
-        if form.is_valid():
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            user = auth.authenticate(username=username, password=password)
-            if user.is_active:
-                auth.login(request, user)
-                return HttpResponseRedirect(reverse('index'))
-            else:
-                print("Пользователь неактивный")
-        else:
-            print(form.errors)
-    else:
-        form = UserLoginForm()
+class LoginUserView(LoginView, BaseClassContextMixin, CustomDispatchMixin):
+    model = User
+    template_name = 'authapp/login.html'
+    form_class = UserLoginForm
+    title = 'Geekshop | Авторизация'
+    success_url = reverse_lazy('authapp:index')
 
-    content = {
-        'title': 'Geekshop | Авторизация',
-        'form': form
-    }
-    return render(request, 'authapp/login.html', context=content)
+
+# def login(request):
+#     if request.method == 'POST':
+#         form = UserLoginForm(data=request.POST)
+#         if form.is_valid():
+#             username = request.POST.get('username')
+#             password = request.POST.get('password')
+#             user = auth.authenticate(username=username, password=password)
+#             if user.is_active:
+#                 auth.login(request, user)
+#                 return HttpResponseRedirect(reverse('index'))
+#             else:
+#                 print("Пользователь неактивный")
+#         else:
+#             print(form.errors)
+#     else:
+#         form = UserLoginForm()
+#
+#     content = {
+#         'title': 'Geekshop | Авторизация',
+#         'form': form
+#     }
+#     return render(request, 'authapp/login.html', context=content)
 
 
 def register(request):
