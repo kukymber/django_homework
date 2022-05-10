@@ -1,6 +1,6 @@
 from django.urls import path
 
-from authapp.views import login, logout, register, profile
+from authapp.views import logout, register, profile
 from basket.views import basket_add, basket_remove, basket_edit
 
 app_name = 'basket'
