@@ -67,8 +67,8 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'social_django.context_processor.backends',
-                'social_django.context_processor.login_redirect',
+                # 'social_django.context_processor.backends',
+                # 'social_django.context_processor.login_redirect',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
