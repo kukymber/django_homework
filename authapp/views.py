@@ -68,7 +68,7 @@ class Logout(LogoutView):
 
 
 class ProfileFormView(UpdateView, BaseClassContextMixin, UserDispatchMixin):
-    model = User
+    # model = User
     template_name = 'authapp/profile.html'
     form_class = UserProfileForm
     title = 'Geekshop | Профиль'
@@ -83,8 +83,7 @@ class ProfileFormView(UpdateView, BaseClassContextMixin, UserDispatchMixin):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileFormView, self).get_context_data()
-        context['profile'] = UserProfileForm(instance=self.request.user.userprofile)
-        context['baskets'] = Basket.objects.filter(user=self.request.user)
+        context['profile'] = UserProfileEditForm(instance=self.request.user.userprofile)
         return context
 
     def form_valid(self, form):

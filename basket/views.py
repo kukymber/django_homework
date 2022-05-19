@@ -61,8 +61,8 @@ def basket_edit(request, basket_id, quantity):
         else:
             basket.delete()
 
-        baskets = Basket.objects.filter(user=request.user)
-        context = {'baskets': baskets}
+    baskets = Basket.objects.filter(user=request.user)
+    context = {'baskets': baskets}
 
-        result = render_to_string('basket/basket.html', context)
-        return JsonResponse({'result': result})
+    result = render_to_string('basket/basket.html', context)
+    return JsonResponse({'result': result})
