@@ -50,10 +50,15 @@ class Order(models.Model):
         self.is_active = False
         self.save()
 
-class OrderItems(models.Model):
+
+class OrderItem(models.Model):
     order = models.ForeignKey(Order, verbose_name='заказ', related_name='orderitems', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, verbose_name='продукты', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(verbose_name='количество', default=0)
 
     def get_product_cost(self):
         return self.product.price * self.quantity
+
+    @staticmethod
+    def get_item(pk):
+        return OrderItem.objects.get(pk=pk).qunatity

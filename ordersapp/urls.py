@@ -6,12 +6,11 @@ from ordersapp.views import OrderCreate, OrderUpdate, OrderDelete, OrderList, or
 app_name = 'ordersapp'
 urlpatterns = [
     path('', OrderList.as_view(), name='list'),
-    path('index/', index, name='index'),
+    path('read/<int:pk>/', OrderRead.as_view(), name='read'),
     path('create/', OrderCreate.as_view(), name='create'),
-    path('update/<int:pk>/', OrderUpdate.as_view(), name='update'),
     path('delete/<int:pk>/', OrderDelete.as_view(), name='delete'),
+    path('update/<int:pk>/', OrderUpdate.as_view(), name='update'),
     path('forming_complete/<int:pk>/', order_forming_complete, name='forming_complete'),
-    path('read/<int:pk>/', OrderRead.as_view(), name='read')
 
 
 ]

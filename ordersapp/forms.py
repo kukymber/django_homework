@@ -1,5 +1,5 @@
 from django import forms
-from ordersapp.models import Order
+from ordersapp.models import Order, OrderItem
 
 
 class OrderForm(forms.ModelForm):
@@ -17,7 +17,7 @@ class OrderItemsForm(forms.ModelForm):
     price = forms.CharField(label='Цена', required=False)
 
     class Meta:
-        model = Order
+        model = OrderItem
         fields = '__all__'
 
     def __init__(self, *args, **kwargs):
