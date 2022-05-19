@@ -40,13 +40,15 @@
                 </li>
                 {% if not user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'authapp:login' %}">Войти <i class="fas fa-sign-in-alt"></i></a>
+                    <a class="nav-link" href="{% url 'authapp:login' %}">Войти <i
+                            class="fas fa-sign-in-alt"></i></a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <div class="dropdowm">
-                        <a class="nav-link dropdown-toggle'" href="" data-toggle="dropdown">
-                            {{user.username|default:'Пользователь'}}
+
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown">
+                            {{ user.username|default:'Пользователь' }}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -56,29 +58,27 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="nav-link text-dark"  href="{% url 'ordersapp:list' %}">
+                                <a class="nav-link text-dark" href="{% url 'orders:list' %}">
                                     Заказы
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
-
-                            {% if user.is_staff or user.is_superuser %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'adminapp:index' %}">
-                                    <i class="fas fa-users-cog"></i>
-                                </a>
-                            </li>
-                            {% endif %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'authapp:logout' %}">Выйти <i
-                                        class="fas fa-sign-out-alt"></i></a>
-                            </li>
-                            {% endif %}
-                        </ul>
-                    </div>
+                {% if user.is_staff or user.is_superuser %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'adminapp:index' %}">
+                        <i class="fas fa-users-cog"></i>
+                    </a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'authapp:logout' %}">Выйти <i class="fas fa-sign-out-alt"></i></a>
+                </li>
+                {% endif %}
+            </ul>
         </div>
+    </div>
 </nav>
 
 {% block content %}
@@ -90,7 +90,9 @@
 <!-- Bootstrap core JavaScript -->
 <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+<script src="{% static 'js/jquery.formset.js' %}"></script>
 <script src="{% static 'js/basket.js' %}"></script>
+<script src="{% static 'js/orders_scripts.js' %}"></script>
 
 <!-- FontAwesome script -->
 <script src="{% static 'vendor/fontawesome/fontawesome-icons.js' %}" crossorigin="anonymous"></script>
