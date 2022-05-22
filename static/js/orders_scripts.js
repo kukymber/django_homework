@@ -43,7 +43,7 @@ window.onload = function(){
 
 
    // method => 2
-      $('order_form').on('click', 'input[type=number]', function(){
+      $('order_form').on('click', 'input[type=checkbox ]', function(){
         let target = event.target;
         console.log(target)
         orderitem_num = parseInt(target.name.replace('orderitems-','').replace('-DELETE', ''))
@@ -64,7 +64,7 @@ window.onload = function(){
 
 
    function orderSummaryUpdate(orderitem_price, delta_quantity){
-        delta_cost = orderitem_price*delta_quantity;
+        delta_cost = orderitem_price * delta_quantity;
         order_total_cost = Number((order_total_cost+delta_cost)toFixed(2))
         order_total_quantity = order_total_quantity+delta_quantity;
         $('.order_total_quantity').html(order_total_quantity.toString());
@@ -73,7 +73,7 @@ window.onload = function(){
 
 
 
-    $('.formset-row').formset({
+    $('.formset_row').formset({
         addText: 'добавить продукт',
         deleteText: 'удалить продукт',
         prefix: 'orderitems',
@@ -86,6 +86,26 @@ window.onload = function(){
         delta_quantity = -quantity_arr[orderitem_num]
         orderSummaryUpdate(price_arr[orderitem_num], delta_quantity)
    }
+   $(document).on('change','.order_form select', function(){
+//   $('.order_form select').change(function(){
 
+        let target = event.target
+        orderitem_num = parseInt(target.name.replace('orderitems-','').replace('-product', ''))
+        orderitem_product_pk = target.options[target.selectedIndex].value;
 
+        if (orederitem_product_pk){
+            $.ajax({
+            url:'/ordersapp/product/' + orderitem_product + '/price/',
+            success: function (data){
+                    let price_html = '<span class="orderitems-' + orderitem_num +  '-price">' +
+                    data.price.toString().replace('.', ',') + '</span> руб';
+
+                    let = current_tr = $('.order_form table').find('tr:eq('+(orderitem_num+1) + ')');
+                    current_tr.find('td:eq(2)').html(price_html)
+                }
+            })
+        }
+        console.log(order_item_pk)
+        console.log(target)
+   })
 }
