@@ -1,0 +1,313 @@
+    1  exit
+    2  grep ^www-data /etc/group
+    3  python3 -m venv env
+    4  source /env/bin/activate
+    5  ls
+    6  cd..
+    7  cd ..
+    8  ls
+    9  cat /root
+   10  ls
+   11  ssh-keygen -t ed25519
+   12  ls
+   13  cat/root/.ssh/id_rsa.pub
+   14  cat/root/.ssh/ed25519
+   15  ls
+   16  apt update
+   17  apt install nginx
+   18  apt install postgresql
+   19  apt install postgresql postgresql-contrib
+   20  ls
+   21  cd ..
+   22  ls
+   23  cd ~
+   24  apt install python3-venv
+   25  ls
+   26  cd
+   27  log
+   28  cd log
+   29  nano /etc/
+   30  nano /etc/postgresql/12/main/pg_hba.conf
+   31  systemctl restart postgresql 
+   32  systemctl status postgresql 
+   33  git clone https://github.com/kukymber/django_homework.git
+   34  ls\
+   35  ls
+   36  cd django_homework
+   37  cd geekshop/
+   38  ls
+   39  git  branch
+   40  git checkout kurs_2_lesson5
+   41  git checkout kurs_2_lesson_5
+   42  git  branch
+   43  nano .env
+   44  ls
+   45  cd ..
+   46  ls
+   47  nano .env
+   48  ls
+   49  ls -l
+   50  nano .env
+   51  ls la
+   52  ls -la
+   53  ls
+   54  cd ..
+   55  ls
+   56  useradd -g www-data -m django
+   57  ls
+   58  ls -la
+   59  rm -R  django_homework
+   60  ls
+   61  cd /home/django/
+   62  ls
+   63  git clone https://github.com/kukymber/django_homework.git
+   64  git checkout kurs_2_lesson_5
+   65  ls
+   66  git branch
+   67  cd django_homework
+   68  git branch
+   69  git checkout kurs_2_lesson_5
+   70  git branch
+   71  ls
+   72  nano .env
+   73  ls -la
+   74  python3 -m venv env
+   75  source env/bin/activate
+   76  pip install - r
+   77  pip install -r
+   78  pip install -r django_homework/geekshop/requirements.txt
+   79  pip install -r requirements.txt
+   80  ls
+   81  cd ..
+   82  ls
+   83  cd ..
+   84  ls
+   85  ls -la
+   86  apt update
+   87  apt install nginx
+   88  apt install postgresql postgresql-contrib
+   89  apt install python-venv
+   90  ls
+   91  cd ./
+   92  git clone https://github.com/kukymber/django_homework.git
+   93  ls
+   94  cd django_homework
+   95  git branch
+   96  git checkout kurs_2_lesson_5
+   97  git checkout kurs_2lesson_5
+   98  git checkout kurs_2_lesson_5
+   99  git branch
+  100  ls
+  101  nano .env
+  102  ls -la
+  103  user
+  104  cd ..
+  105  rm - django_homework
+  106  ls
+  107  cd django_home_work
+  108  cd django_homework
+  109  rm - django_homework
+  110  cd ..
+  111  rm -r django_homework
+  112  ls
+  113  useradd -g www-data -m 
+  114  useradd -g www-data -m django
+  115  user --help
+  116  su django
+  117  passwd -S django
+  118  passwd django
+  119  su django
+  120  cd /home/django
+  121  ls
+  122  cd
+  123  cd ..
+  124  ls -la
+  125  cd etc
+  126  ls
+  127  cd ..
+  128  man usermod
+  129  cd
+  130  info
+  131  su username django
+  132  su 
+  133  ls
+  134  rm -r env
+  135  ls
+  136  cd /home/django
+  137  l
+  138  ls
+  139  git check
+  140  git checkout
+  141  rm - r django_homework
+  142  ls
+  143  rm -r django_homework
+  144  ls
+  145  rm -r env
+  146  git clone https://github.com/kukymber/django_homework.git
+  147  ls
+  148  git checkout
+  149  cd django_homework
+  150  git checkout
+  151  git branch kurs_2_lesson_5
+  152  git checkout
+  153  git branch kurs_2_lesson_5
+  154  git branc
+  155  git branch
+  156  git chekout kurs_2_lesson_5
+  157  git checkout kurs_2_lesson_5
+  158  git branch
+  159  nano .env
+  160  ls
+  161  cd
+  162  cd ..
+  163  ls
+  164  cd /home/django
+  165  ls
+  166  python3 -m venv env
+  167  source env/bin/activate
+  168  ls
+  169  pip install -r
+  170  pip install -r django_homework/requirements.txt
+  171  pip install wheel
+  172  ls
+  173  pip install gunicorn
+  174  psql -U  postgres
+  175  ls
+  176  ls -la
+  177  ls
+  178  cd django_homework
+  179  ls-la
+  180  cd ..
+  181  rm env
+  182  rm -r .env
+  183  ls
+  184  rm env
+  185  rm .env
+  186  ls
+  187  cd .env
+  188  nano .env
+  189  ls
+  190  cd django_homework
+  191  nano .env
+  192  ls
+  193  ls -la
+  194  python manage.py migrate
+  195  python manage.py makemigrations
+  196  git pull
+  197  python manage.py migrate
+  198  git pull
+  199  git branch
+  200  git checkout main
+  201  git checkout kurs_2_lesson_5
+  202  ls
+  203  cd geekshop
+  204  ls
+  205  nano urls.py
+  206  ls
+  207  cd..
+  208  cd ..
+  209  ls
+  210  python manage.py migrate
+  211  cd geekshop
+  212  nano urls.py
+  213  ls
+  214  python manage.py migrate
+  215  cd ..
+  216  python manage.py migrate
+  217  python manage.py fill_db
+  218  python manage.py createsuperuser
+  219  python manage.py runserver
+  220  python manage.py runserver 0.0.0.0:8001
+  221  nano /etc/systemd/system/gunicorn.service
+  222  systemctl enable gunicorn
+  223  systemctl start gunicorn
+  224  systemctl status gunicorn
+  225  nano /etc/systemd/system/gunicorn.service
+  226  systemctl enable gunicorn
+  227  systemctl start gunicorn
+  228  systemctl status gunicorn
+  229  chown -R django /home/django/
+  230  chmod -R 755 /home/django/django_homework/
+  231  systemctl status gunicorn
+  232  nano /etc/systemd/system/gunicorn.service
+  233  systemctl start gunicorn
+  234  systemctl status gunicorn
+  235  systemctl deamon-reload
+  236  systemctl restart
+  237  systemctl restart gunicorn
+  238* s
+  239  systemctl daemon-reload
+  240  systemctl enable gunicorn
+  241  systemctl start gunicorn
+  242  systemctl status gunicorn
+  243  nano /etc/systemd/system/gunicorn.service
+  244* systemctl  gunicorn
+  245  systemctl start gunicorn
+  246  systemctl daemon-reload
+  247  systemctl start gunicorn
+  248  systemctl status gunicorn
+  249  nano /etc/systemd/system/gunicorn.service
+  250  systemctl daemon-reload
+  251  systemctl enable gunicorn
+  252  systemctl start gunicorn
+  253  systemctl status gunicorn
+  254  [Unit]
+  255  Description=gunicorn daemon
+  256  After=network.target
+  257  [Service]
+  258  User=django
+  259  Group=www-data
+  260  WorkingDirectory=/home/django/geekshop
+  261  ExecStart=/home/django/geekshop/env/bin/gunicorn --access-logfile - --workers 3 --bind
+  262  unix:/home/django/geekshop/geekshop.sock geekshop.wsgi
+  263  [Install]
+  264  WantedBy=multi-user.target
+  265  systemctl status gunicorn
+  266  nano /etc/nginx/sites-available/geekshop
+  267  ls /django_homework/geekshop/
+  268  ls /django_homework/geekshop
+  269  ls geekshop
+  270  ln -s /etc/nginx/sites-available/geekshop /etc/nginx/sites-enabled
+  271  nginx -t
+  272  sudo nginx -t
+  273  ln -s /etc/nginx/sites-available/geekshop /etc/nginx/sites-enabled/
+  274  ln -s
+  275  ln --help
+  276  su nginx -t
+  277  nginx --help
+  278  nginx -help
+  279  nginx help
+  280  nginx --help
+  281  nginx -help
+  282  rm /etc/nginx/sites-enabled/default
+  283  systemctl restart nginx
+  284  systemctl restart nginx.servuce
+  285  systemctl restart nginx.service
+  286  sudo fuser -k 80/tcp
+  287  sudo fuser -k 443/tcp
+  288  sudo service nginx restart
+  289  тпштч -е
+  290  nginx -t
+  291  sudo nginx -t
+  292  cd /etc/nginx/sites-enabled/geekshop:9
+  293  cd /etc/nginx/sites-enabled
+  294  ls
+  295  cd geekshop
+  296  ls
+  297  nano geekshop
+  298  cd /home/django/django_homework
+  299  nginx -t
+  300  ln -s /etc/nginx/sites-available/geekshop /etc/nginx/sites-enabled/
+  301  cd /etc/nginx/sites-available
+  302  ls
+  303  nginx -t
+  304  systemstl restart nginx
+  305  systemctl restart nginx
+  306  systemctl status nginx
+  307  history
+  308  cd /tmp/
+  309  ls
+  310  cd
+  311  history > /tmp/history.txt
+  312  cat > /tmp/history.txt
+  313  history > /tmp/history.txt
