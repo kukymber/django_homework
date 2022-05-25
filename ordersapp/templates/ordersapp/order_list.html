@@ -7,9 +7,9 @@
     <div class="h2 text-center head">
         Ваши заказы,
         {% if user.first_name %}
-        {{ user.first_name|title }}
+            {{ user.first_name|title }}
         {% else %}
-        Пользователь
+            Пользователь
         {% endif %}
     </div>
     <table class="table order_list">
@@ -23,7 +23,7 @@
         </thead>
         <tbody>
         {% for item in object_list %}
-        {% if item.is_active %}
+            {% if item.is_active %}
         <tr>
             <td class="td1 orders_list">{{ item.pk }}</td>
             <td>{{ item.created|date:"Y-m-d H:i:s" }}</td>
@@ -49,7 +49,7 @@
                 {% endif %}
             </td>
         </tr>
-        {% endif %}
+            {% endif %}
         {% endfor %}
         </tbody>
     </table>

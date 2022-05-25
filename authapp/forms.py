@@ -20,11 +20,11 @@ class UserLoginForm(AuthenticationForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
 
-    def clean_username(self):
-        data = self.cleaned_data['username']
-        if not data.isalnum():
-            raise ValidationError('Имя пользователя может содержать только цифры и буквы')
-        return data
+    # def clean_username(self):
+    #     data = self.cleaned_data['username']
+    #     if not data.isalnum():
+    #         raise ValidationError('Имя пользователя может содержать только цифры и буквы')
+    #     return data
 
 
 class UserRegisterForm(UserCreationForm):
@@ -40,6 +40,7 @@ class UserRegisterForm(UserCreationForm):
         self.fields['last_name'].widget.attrs['placeholder'] = "Введите Фамилию"
         self.fields['first_name'].widget.attrs['placeholder'] = "Введите Имя"
         self.fields['email'].widget.attrs['placeholder'] = "Введите email"
+
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
 

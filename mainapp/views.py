@@ -20,11 +20,7 @@ from mainapp.models import Product, ProductCategory
 def index(request):
     data_time = {'data_time_now': datetime.datetime.now().strftime("%d-%m-%Y %H:%M")}
     content = {
-
-        'name_of_shop': 'GeekShop Store',
-        'text': 'Новые образы и лучшие бренды на GeekShop Store.'
-                'Бесплатная доставка по всему миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.',
-        'button_name': 'Начать покупки',
+        'title': 'GeekShop',
         'data_time': data_time
 
     }
